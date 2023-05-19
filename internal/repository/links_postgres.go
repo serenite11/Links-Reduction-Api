@@ -17,8 +17,13 @@ func NewLinksPostgres(db *sqlx.DB) *LinksPostgres {
 
 func (r *LinksPostgres) CreateShortUrl(longUrl string) (string, error) {
 	shortUrl := generateShortUrl(longUrl)
+	err := r.findSimilarShortUrl(shortUrl)
+	for err != nil {
+		shortUrl = generateShortUrl(longUrl)
+		err = r.findSimilarShortUrl(shortUrl)
+	}
 	query := fmt.Sprintf("INSERT INTO links (long_url,short_url) values ($1,$2)")
-	_, err := r.db.Query(query, longUrl, shortUrl)
+	_, err = r.db.Query(query, longUrl, shortUrl)
 	if err != nil {
 		return "", err
 	}
@@ -33,4 +38,11 @@ func (r *LinksPostgres) GetLongUrl(shortUrl string) (string, error) {
 		return "", err
 	}
 	return link.LongUrl, nil
+}
+
+func (r *LinksPostgres) findSimilarShortUrl(shortUrl string) error {
+	var link models.Link
+	query := fmt.Sprintf("SELECT * FROM links WHERE short_url=$1")
+	err := r.db.Get(&link, query, shortUrl)
+	return err
 }

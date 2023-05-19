@@ -24,8 +24,18 @@ func NewLinkInMemory(links map[string]string) *LinkInMemory {
 
 func (l *LinkInMemory) CreateShortUrl(longUrl string) (string, error) {
 	shortUrl := generateShortUrl(longUrl)
+	for key, value := range l.Links {
+		if key == longUrl {
+			return "", errors.New("there is already a link with this name")
+		}
+		if value == shortUrl {
+			l.CreateShortUrl(longUrl)
+		}
+	}
 	l.Links[longUrl] = shortUrl
-	log.Print(l.Links)
+	for key, value := range l.Links {
+		log.Printf("%s : %s", key, value)
+	}
 	return l.Links[longUrl], nil
 }
 
