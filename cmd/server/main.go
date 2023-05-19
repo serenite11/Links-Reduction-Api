@@ -6,7 +6,7 @@ import (
 	"github.com/serenite11/Links-Reduction-Api/internal/handlers"
 	"github.com/serenite11/Links-Reduction-Api/internal/repository"
 	"github.com/serenite11/Links-Reduction-Api/internal/service"
-	"github.com/serenite11/Links-Reduction-Api/pkg/server"
+	"github.com/serenite11/Links-Reduction-Api/pkg"
 	log "github.com/sirupsen/logrus"
 	"os"
 )
@@ -29,10 +29,11 @@ func main() {
 		log.Fatalf("%s", err.Error())
 		return
 	}
+	links := database.NewLinkInMemory()
 	repo := repository.NewRepository(db)
-	services := service.NewService(repo)
+	services := service.NewService(repo, links)
 	handler := handlers.NewHandler(services)
-	srv := new(server.Server)
+	srv := new(pkg.Server)
 	if err := srv.Run("8080", handler.InitRoutes()); err != nil {
 		log.Fatalf("%s", err.Error())
 		return
