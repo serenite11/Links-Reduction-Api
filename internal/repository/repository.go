@@ -3,16 +3,22 @@ package repository
 import "github.com/jmoiron/sqlx"
 
 type Repository struct {
-	ILinksActions
+	LinksShortener
 }
 
-type ILinksActions interface {
-	CreateShortUrl(longUrl string, shortUrl string) (string, error)
+type LinksShortener interface {
+	CreateShortUrl(longUrl string) (string, error)
 	GetLongUrl(shortUrl string) (string, error)
 }
 
-func NewRepository(db *sqlx.DB) *Repository {
+func NewRepositoryPostgres(db *sqlx.DB) *Repository {
 	return &Repository{
 		NewLinksPostgres(db),
+	}
+}
+
+func NewRepositoryInMemory(links map[string]string) *Repository {
+	return &Repository{
+		NewLinkInMemory(links),
 	}
 }

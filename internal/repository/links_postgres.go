@@ -15,7 +15,8 @@ func NewLinksPostgres(db *sqlx.DB) *LinksPostgres {
 	return &LinksPostgres{db: db}
 }
 
-func (r *LinksPostgres) CreateShortUrl(longUrl string, shortUrl string) (string, error) {
+func (r *LinksPostgres) CreateShortUrl(longUrl string) (string, error) {
+	shortUrl := generateShortUrl(longUrl)
 	query := fmt.Sprintf("INSERT INTO links (long_url,short_url) values ($1,$2)")
 	_, err := r.db.Query(query, longUrl, shortUrl)
 	if err != nil {
