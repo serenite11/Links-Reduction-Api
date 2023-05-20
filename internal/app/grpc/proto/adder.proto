@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package grpc;
+
+option go_package = "github.com/serenite11/Links-Reduction-Api/internal/app/grpc/proto/adder.proto";
+
+service Adder{
+  rpc Add(AddRequest) returns (AddResponse){}
+  rpc Get(GetRequest) returns (GetResponse){}
+}
+
+message AddRequest{
+  string url = 1;
+}
+
+message AddResponse{
+  string url =1;
+}
+message GetRequest{
+  string url = 1;
+}
+message GetResponse{
+  string url = 1;
+}

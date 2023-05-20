@@ -2,9 +2,10 @@ package main
 
 import (
 	"github.com/joho/godotenv"
-	"github.com/serenite11/Links-Reduction-Api/internal/app/http"
+	"github.com/serenite11/Links-Reduction-Api/internal/app/grpc"
+	"github.com/serenite11/Links-Reduction-Api/internal/app/rest"
+	"github.com/serenite11/Links-Reduction-Api/internal/app/rest/handlers"
 	"github.com/serenite11/Links-Reduction-Api/internal/database"
-	"github.com/serenite11/Links-Reduction-Api/internal/handlers"
 	"github.com/serenite11/Links-Reduction-Api/internal/repository"
 	"github.com/serenite11/Links-Reduction-Api/internal/service"
 	log "github.com/sirupsen/logrus"
@@ -22,6 +23,7 @@ func main() {
 		log.Fatalf("%s", err.Error())
 		return
 	}
+	defer db.Close()
 	store := os.Getenv("STORE")
 	repo := new(repository.Repository)
 	if store == "POSTGRES" {
@@ -33,13 +35,16 @@ func main() {
 	}
 	services := service.NewService(repo)
 	handler := handlers.NewHandler(services)
-	srv := new(http.Server)
-	if err := srv.Run("8080", handler.InitRoutes()); err != nil {
+	restSrv := new(rest.Server)
+	grpcSrv := grpc.NewGrpcServer(services)
+	go func() {
+		if err := restSrv.Run("8080", handler.InitRoutes()); err != nil {
+			log.Fatalf("%s", err.Error())
+			return
+		}
+	}()
+	if err := grpcSrv.Run("localhost:5000"); err != nil {
 		log.Fatalf("%s", err.Error())
-		return
-	}
-	if err := db.Close(); err != nil {
-		log.Fatalf("error db close connection:%s", err.Error())
 		return
 	}
 }
