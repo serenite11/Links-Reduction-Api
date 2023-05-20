@@ -10,6 +10,8 @@ import (
 	"github.com/serenite11/Links-Reduction-Api/internal/service"
 	log "github.com/sirupsen/logrus"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 func main() {
@@ -36,15 +38,21 @@ func main() {
 	services := service.NewService(repo)
 	handler := handlers.NewHandler(services)
 	restSrv := new(rest.Server)
-	grpcSrv := grpc.NewGrpcServer(services)
+	grpcSrv := new(grpc.Server)
 	go func() {
 		if err := restSrv.Run("8080", handler.InitRoutes()); err != nil {
 			log.Fatalf("%s", err.Error())
 			return
 		}
 	}()
-	if err := grpcSrv.Run("localhost:5000"); err != nil {
-		log.Fatalf("%s", err.Error())
-		return
-	}
+	go func() {
+		if err := grpcSrv.Run(":5001", services); err != nil {
+			log.Fatalf("%s", err.Error())
+			return
+		}
+	}()
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<-quit
+	log.Println("Api is Shutting Down...")
 }

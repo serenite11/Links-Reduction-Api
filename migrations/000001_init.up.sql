@@ -1,5 +1,5 @@
 CREATE TABLE links
 (
-  long_url varchar(255) unique,
-  short_url varchar(255) unique
+  long_url varchar unique,
+  short_url varchar unique
 );

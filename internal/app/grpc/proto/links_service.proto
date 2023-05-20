@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package grpc;
+
+option go_package = "github.com/serenite11/Links-Reduction-Api/internal/app/grpc/api/";
+
+service linksService{
+  rpc CreateShortUrl(CreateShortUrlRequest) returns (CreateShortUrlResponse){}
+  rpc GetLongUrl(GetLongUrlRequest) returns (GetLongUrlResponse){}
+}
+
+message CreateShortUrlRequest{
+  string url = 1;
+}
+
+message CreateShortUrlResponse{
+  string url =1;
+}
+message GetLongUrlRequest{
+  string url = 1;
+}
+message GetLongUrlResponse{
+  string url = 1;
+}

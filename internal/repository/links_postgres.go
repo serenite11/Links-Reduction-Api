@@ -18,7 +18,7 @@ func NewLinksPostgres(db *sqlx.DB) *LinksPostgres {
 func (r *LinksPostgres) CreateShortUrl(longUrl string) (string, error) {
 	shortUrl := generateShortUrl(longUrl)
 	err := r.findSimilarShortUrl(shortUrl)
-	for err != nil {
+	for err == nil {
 		shortUrl = generateShortUrl(longUrl)
 		err = r.findSimilarShortUrl(shortUrl)
 	}

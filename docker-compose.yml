@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_DBNAME: links-reduction-db
+    ports:
+      - "5433:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+  server:
+    image: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5433
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=qwerty
+      - DB_NAME=postgres
+      - DB_SSLMODE=disable
+      - STORE=POSTGRES
+    depends_on:
+      - database
+    networks:
+      - default
+    ports:
+      - "8080:8080"
+volumes:
+  data:
