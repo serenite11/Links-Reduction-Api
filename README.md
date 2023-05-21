@@ -20,7 +20,7 @@
 
 <h2>Grpc</h2>
 
-<h3><code>localhost:5500</code></h3>
+<code>localhost:5500</code>
 
 <h3><code>CreateShortUrl</code></h3>
 
