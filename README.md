@@ -13,7 +13,7 @@
 
 <h3><code>GET</code></h3>
 
-<h3><code>http://localhost:8080/ </code></h3>
+<code>http://localhost:8080/ </code>
 
 <img src="imgs/Get-Rest.jpg" width="" height="">
 
