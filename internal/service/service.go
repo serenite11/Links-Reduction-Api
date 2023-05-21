@@ -4,6 +4,8 @@ import (
 	"github.com/serenite11/Links-Reduction-Api/internal/repository"
 )
 
+//go:generate mockgen -source=service.go -destination=mocks/mock.go
+
 type Service struct {
 	LinksShortener
 }

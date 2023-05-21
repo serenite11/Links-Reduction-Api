@@ -23,7 +23,7 @@ func NewGrpcServer(service *service.Service) *Server {
 }
 
 func (s *Server) Run(port string, services *service.Service) error {
-	lis, err := net.Listen("tcp", port)
+	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		return err
 	}

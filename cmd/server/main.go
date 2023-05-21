@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
 	"github.com/serenite11/Links-Reduction-Api/internal/app/grpc"
 	"github.com/serenite11/Links-Reduction-Api/internal/app/rest"
 	"github.com/serenite11/Links-Reduction-Api/internal/app/rest/handlers"
@@ -16,10 +15,6 @@ import (
 
 func main() {
 	log.SetFormatter(new(log.JSONFormatter))
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("env doesn`t exist:%s", err.Error())
-		return
-	}
 	db, err := database.NewPostgres()
 	if err != nil {
 		log.Fatalf("%s", err.Error())
@@ -46,7 +41,7 @@ func main() {
 		}
 	}()
 	go func() {
-		if err := grpcSrv.Run(":5001", services); err != nil {
+		if err := grpcSrv.Run("5500", services); err != nil {
 			log.Fatalf("%s", err.Error())
 			return
 		}

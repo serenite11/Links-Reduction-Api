@@ -17,11 +17,11 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - DB_HOST=host.docker.internal
-      - DB_PORT=5433
+      - DB_HOST=database
+      - DB_PORT=5432
       - DB_USERNAME=postgres
       - DB_PASSWORD=qwerty
-      - DB_NAME=postgres
+      - DB_NAME=links-reduction-db
       - DB_SSLMODE=disable
       - STORE=POSTGRES
     depends_on:
@@ -30,5 +30,7 @@ services:
       - default
     ports:
       - "8080:8080"
+      - "5500:5500"
 volumes:
   data:
+

@@ -1,11 +1,11 @@
-package handlers
+package service
 
 import (
 	"errors"
 	"net/url"
 )
 
-func validateCreateShortUrl(link string) error {
+func validateLink(link string) error {
 	if link == "" {
 		return errors.New("Empty request")
 	}

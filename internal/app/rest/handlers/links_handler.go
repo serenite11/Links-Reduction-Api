@@ -12,10 +12,6 @@ func (h *Handler) createShortUrl(c *gin.Context) {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	if err := validateCreateShortUrl(link.LongUrl); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, err.Error())
-		return
-	}
 	shortUrl, err := h.services.LinksShortener.CreateShortUrl(link.LongUrl)
 	if err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
@@ -34,7 +30,7 @@ func (h *Handler) getOriginUrl(c *gin.Context) {
 	}
 	longUrl, err := h.services.LinksShortener.GetLongUrl(link.ShortUrl)
 	if err != nil {
-		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		newErrorResponse(c, http.StatusBadRequest, "OriginUrl is not find")
 		return
 	}
 	c.JSON(http.StatusOK, map[string]interface{}{

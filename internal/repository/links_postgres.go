@@ -23,7 +23,7 @@ func (r *LinksPostgres) CreateShortUrl(longUrl string) (string, error) {
 		err = r.findSimilarShortUrl(shortUrl)
 	}
 	query := fmt.Sprintf("INSERT INTO links (long_url,short_url) values ($1,$2)")
-	_, err = r.db.Query(query, longUrl, shortUrl)
+	_, err = r.db.Queryx(query, longUrl, shortUrl)
 	if err != nil {
 		return "", err
 	}
