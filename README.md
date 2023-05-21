@@ -8,19 +8,19 @@
 
 <code>http://localhost:8080/ </code> 
 
-<code>&nbsp;&nbsp;{<br>&nbsp; &nbsp;&nbsp;&nbsp;"long_url":"https://www.youtube.com" <br>&nbsp; &nbsp;}</code>
+<code>{"long_url":"https://www.youtube.com"}</code>
 
 <h4><code>Response</code></h4>
-<code>&nbsp;&nbsp;{<br>&nbsp; &nbsp;&nbsp;&nbsp;"shortLink":"aB3jOoPlM_" <br>&nbsp;&nbsp; }</code>
+<code>{ "shortLink":"aB3jOoPlM_" }</code>
 
 <h2><code>GET</code></h2>
 
 <h3><code>http://localhost:8080/ </code></h3>
 
-<h3><code>&nbsp;&nbsp;{<br>&nbsp; &nbsp;&nbsp;&nbsp;"short_url":"aB3jOoPlM_"<br>&nbsp;&nbsp;&nbsp;}</code>
+<code>{"short_url":"aB3jOoPlM_"}</code>
 
 <h4><code>Response</code></h4>
-<code>&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"longLink":"https://www.youtube.com" <br>&nbsp;&nbsp; }</code>
+<code>{"longLink":"https://www.youtube.com"}</code>
 
 <h2>Grpc</h2>
 
@@ -28,14 +28,14 @@
 
 <code>CreateShortUrl</code><
 
-<code>&nbsp;&nbsp;{<br>&nbsp; &nbsp;&nbsp;&nbsp;"url":"https://www.youtube.com"<br> &nbsp;&nbsp; } </code>
+<code>{"url":"https://www.youtube.com"} </code>
 <h4><code>Response</code></h4>
-<code>&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url":"aB3jOoPlM_" <br>&nbsp;&nbsp; }</code>
+<code>{"url":"aB3jOoPlM_"}</code>
 <code>GetLongUrl</code>
 
-<code>&nbsp;&nbsp;{<br>&nbsp; &nbsp;&nbsp;&nbsp;"url":"aB3jOoPlM_"<br> &nbsp;&nbsp; } </code>
+<code>{"url":"aB3jOoPlM_"} </code>
 <h4><code>Response</code></h4>
-<code>&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url":"https://www.youtube.com" <br>&nbsp;&nbsp; }</code></h3>
+<code>{"url":"https://www.youtube.com" }</code></h3>
 
 <h3>Для тестов используйте команду:</h3>
 <code>make test</code>
