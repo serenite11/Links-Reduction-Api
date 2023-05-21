@@ -7,6 +7,11 @@ import (
 	"os"
 )
 
+var links = `CREATE TABLE IF NOT EXISTS links (
+	long_url varchar unique,
+  	short_url varchar unique
+);`
+
 type Config struct {
 	Host     string
 	Port     string
@@ -32,6 +37,9 @@ func NewPostgres() (*sqlx.DB, error) {
 	}
 	err = db.Ping()
 	if err != nil {
+		return nil, err
+	}
+	if _, err := db.Exec(links); err != nil {
 		return nil, err
 	}
 	return db, nil
