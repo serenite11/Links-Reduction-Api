@@ -4,7 +4,7 @@
 <code>make compose</code>
 <h2>REST:</h2>
 
-<h2><code>POST</code></h2>
+<h3><code>POST</code></h3>
 
 <code>http://localhost:8080/ </code> 
 
@@ -13,7 +13,7 @@
 <h4><code>Response</code></h4>
 <code>{ "shortLink":"aB3jOoPlM_" }</code>
 
-<h2><code>GET</code></h2>
+<h3><code>GET</code></h3>
 
 <h3><code>http://localhost:8080/ </code></h3>
 
@@ -26,16 +26,17 @@
 
 <h3><code>localhost:5500</code></h3>
 
-<code>CreateShortUrl</code><
+<h3><code>CreateShortUrl</code></h3>
 
 <code>{"url":"https://www.youtube.com"} </code>
 <h4><code>Response</code></h4>
 <code>{"url":"aB3jOoPlM_"}</code>
-<code>GetLongUrl</code>
+
+<h3><code>GetLongUrl</code></h3>
 
 <code>{"url":"aB3jOoPlM_"} </code>
 <h4><code>Response</code></h4>
-<code>{"url":"https://www.youtube.com" }</code></h3>
+<code>{"url":"https://www.youtube.com" }</code>
 
 <h3>Для тестов используйте команду:</h3>
 <code>make test</code>
