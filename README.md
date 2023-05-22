@@ -2,6 +2,11 @@
 
 <h4>Для запуска сервиса клонируйте репозиторий и выполните команду:</h4>
 <code>make compose</code>
+
+<h4>Для выбора хранилища в файле docker-compose.yml мжно изменить переменную STORE :</h4>
+
+<code>STORE="POSTGRES"/"IN-MEMORY"</code>
+
 <h2>REST:</h2>
 
 <h3><code>POST</code></h3>
