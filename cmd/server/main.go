@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"github.com/serenite11/Links-Reduction-Api/internal/app/grpc"
 	"github.com/serenite11/Links-Reduction-Api/internal/app/rest"
 	"github.com/serenite11/Links-Reduction-Api/internal/app/rest/handlers"
@@ -50,4 +51,9 @@ func main() {
 	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
 	<-quit
 	log.Println("Api is Shutting Down...")
+	if err := restSrv.ShuttingDown(context.Background()); err != nil {
+		log.Errorf("error occured on server shutting down:%s", err)
+	}
+	grpcSrv.ShuttingDown()
+
 }

@@ -23,12 +23,8 @@ func (h *Handler) createShortUrl(c *gin.Context) {
 }
 
 func (h *Handler) getOriginUrl(c *gin.Context) {
-	var link models.Link
-	if err := c.BindJSON(&link); err != nil {
-		newErrorResponse(c, http.StatusBadRequest, err.Error())
-		return
-	}
-	longUrl, err := h.services.LinksShortener.GetLongUrl(link.ShortUrl)
+	link := c.Param("link")
+	longUrl, err := h.services.LinksShortener.GetLongUrl(link)
 	if err != nil {
 		newErrorResponse(c, http.StatusBadRequest, "OriginUrl is not find")
 		return

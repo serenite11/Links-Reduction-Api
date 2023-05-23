@@ -1,39 +1,41 @@
-<h2>Links-Reduction-Api</h2>
+# Links-Reduction-Api
+ 
+Для запуска сервиса клонируйте репозиторий и выполните команду:
+ 
+`make compose`
 
-<h4>Для запуска сервиса клонируйте репозиторий и выполните команду:</h4>
-<code>make compose</code>
 
-<h4>Для выбора хранилища в файле docker-compose.yml мжно изменить переменную STORE :</h4>
+Для выбора хранилища в файле docker-compose.yml мжно изменить переменную STORE :
 
-<code>STORE="POSTGRES"/"IN-MEMORY"</code>
+`STORE="POSTGRES"/"IN-MEMORY"`
 
-<h2>REST:</h2>
+## REST
 
-<h3><code>POST</code></h3>
+### POST
 
-<code>http://localhost:8080/ </code> 
+`http://localhost:8080/`
 
 <img src="imgs/Post-Rest.jpg" width="" height="">
 
 
-<h3><code>GET</code></h3>
+### GET
 
-<code>http://localhost:8080/ </code>
+`http://localhost:8080/:link` 
 
 <img src="imgs/Get-Rest.jpg" width="" height="">
 
 
-<h2>Grpc</h2>
+## gRPC
 
-<code>localhost:5500</code>
+`localhost:5500`
 
-<h3><code>CreateShortUrl</code></h3>
+### CreateShortUrl
 
 <img src="imgs/CreateShortUrl.jpg" width="" height="">
 
-<h3><code>GetLongUrl</code></h3>
+### GetLongUrl
 
 <img src="imgs/GetLongUrl.jpg" width="" height="">
 
-<h3>Для тестов используйте команду:</h3>
-<code>make test</code>
+Для тестов используйте команду: \
+`make test`
